@@ -29,6 +29,7 @@ typedef enum{
     BOOL _needReceiptPassword;
     AFHTTPClient *_httpClient;
     CGFloat _overlayMessageYOffset;
+    BOOL _initFlag;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *verifyCodeButton;
@@ -55,8 +56,11 @@ typedef enum{
     [self showTaxPayerRow:YES];
     
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    
+    _initFlag = NO;
+    
     [self refreshCookie];
-    [self getVerifyCodeButtonImage];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -100,6 +104,14 @@ typedef enum{
     NSMutableURLRequest *request = [_httpClient requestWithMethod:@"GET" path:@"http://www.bjtax.gov.cn/ptfp/fpindex.jsp" parameters:nil];
     //[request setCachePolicy:NSURLCacheStorageNotAllowed];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self getVerifyCodeButtonImage];
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
     [_httpClient enqueueHTTPRequestOperation:operation];
 }
 
@@ -137,7 +149,6 @@ typedef enum{
             }
         }else{
             [self refreshCookie];
-            [self getVerifyCodeButtonImage];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hideAllOverlayMessage];
                 [self showOverlayMessage:@"请求失败!" hideAfterDelay:1.0];
@@ -145,6 +156,7 @@ typedef enum{
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self refreshCookie];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self hideAllOverlayMessage];
             [self showOverlayMessage:@"请求失败!" hideAfterDelay:1.0];
