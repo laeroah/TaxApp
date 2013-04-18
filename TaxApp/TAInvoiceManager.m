@@ -195,13 +195,13 @@
     
     @(TAInvoiceInfoItemInvoiceCode) :
     @{
-    @"Desc" :   @"发票代码" ,
+    @"Name" :   @"发票代码" ,
     @"Type" : @"Number" ,
     @"MaxLength" : @(25)
     },
     @(TAInvoiceInfoItemInvoiceNumber) :
     @{
-    @"Desc" : @"发票号码",
+    @"Name" : @"发票号码",
     @"Type" : @"Number" ,
     @"MaxLength" : @(8)
     },
@@ -281,6 +281,19 @@
     
     if (!itemDefine)
         return YES;
+    
+    if (invoiceInfoItemType == TAInvoiceInfoItemInvoiceCode &&
+            (!invoiceInfoItemValue || [invoiceInfoItemValue isEqualToString:@""]))
+    {
+        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+        [userInfo setValue:@"发票代码不能为空"forKey:NSLocalizedDescriptionKey];
+        NSError *error = [[NSError alloc] initWithDomain:TAInvoiceErrorDomain code:TAInvoiceInfoItemBadFormat userInfo:userInfo];
+        if (failure) {
+            failure( error );
+        }
+        return NO;
+
+    }
     
     if (invoiceType == TAInvoiceTypeUnknown) {
         NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
