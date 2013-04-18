@@ -256,52 +256,56 @@ typedef enum{
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    NSString *invoiceCode = self.receiptSerialNumberTextField.text;
-    TAInvoiceType invoiceType = TAInvoiceTypeUnknown;
+//    NSString *invoiceCode = self.receiptSerialNumberTextField.text;
+//    TAInvoiceType invoiceType = TAInvoiceTypeUnknown;
+//    
+//    if (invoiceCode)
+//        invoiceType = [[TAInvoiceManager sharedInstance] getInvoiceTypeWithInvoiceCode:invoiceCode];
+//    
+//    if (section == PASSWORD_SECTION) {
+//        if (!invoiceCode || [invoiceCode isEqualToString:@""] ||
+//           ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxPassword invoiceType:invoiceType])
+//            return 0.0f;
+//        else
+//            return 1.0f;
+//    }else if (section == TAXPAYER_SECTION){
+//        if( !invoiceCode || [invoiceCode isEqualToString:@""] ||
+//           ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxControlCode invoiceType:invoiceType])
+//            return 0.0f;
+//        else
+//            return 1.0f;
+//    }else{
+//        return 1.0f;
+//    }
     
-    if (invoiceCode)
-        invoiceType = [[TAInvoiceManager sharedInstance] getInvoiceTypeWithInvoiceCode:invoiceCode];
-    
-    if (section == PASSWORD_SECTION) {
-        if (!invoiceCode || [invoiceCode isEqualToString:@""] ||
-           ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxPassword invoiceType:invoiceType])
-            return 0.0f;
-        else
-            return 1.0f;
-    }else if (section == TAXPAYER_SECTION){
-        if( !invoiceCode || [invoiceCode isEqualToString:@""] ||
-           ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxControlCode invoiceType:invoiceType])
-            return 0.0f;
-        else
-            return 1.0f;
-    }else{
-        return 1.0f;
-    }
+    return 1.0f;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString *headerTitle = [super tableView:tableView titleForHeaderInSection:section];
     
-    NSString *invoiceCode = self.receiptSerialNumberTextField.text;
-    TAInvoiceType invoiceType = TAInvoiceTypeUnknown;
+//    NSString *invoiceCode = self.receiptSerialNumberTextField.text;
+//    TAInvoiceType invoiceType = TAInvoiceTypeUnknown;
+//    
+//    if (invoiceCode)
+//        invoiceType = [[TAInvoiceManager sharedInstance] getInvoiceTypeWithInvoiceCode:invoiceCode];
+//    
+//    if (section == PASSWORD_SECTION) {
+//        if (!invoiceCode || [invoiceCode isEqualToString:@""] ||
+//            ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxPassword invoiceType:invoiceType])
+//            return @"";
+//        return headerTitle;
+//    }else if (section == TAXPAYER_SECTION){
+//        if (!invoiceCode || [invoiceCode isEqualToString:@""] ||
+//            ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxControlCode invoiceType:invoiceType])
+//            return @"";
+//        return headerTitle;
+//    }else{
+//        return headerTitle;
+//    }
     
-    if (invoiceCode)
-        invoiceType = [[TAInvoiceManager sharedInstance] getInvoiceTypeWithInvoiceCode:invoiceCode];
-    
-    if (section == PASSWORD_SECTION) {
-        if (!invoiceCode || [invoiceCode isEqualToString:@""] ||
-            ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxPassword invoiceType:invoiceType])
-            return @"";
-        return headerTitle;
-    }else if (section == TAXPAYER_SECTION){
-        if (!invoiceCode || [invoiceCode isEqualToString:@""] ||
-            ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxControlCode invoiceType:invoiceType])
-            return @"";
-        return headerTitle;
-    }else{
-        return headerTitle;
-    }
+    return headerTitle;
 }
 
 #pragma mark - adjust tableview
