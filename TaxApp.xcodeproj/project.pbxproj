@@ -23,6 +23,7 @@
 		23187CF6171FCDC100EA5792 /* icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 23187CF5171FCDC100EA5792 /* icon_114.png */; };
 		23187CF8171FCE3200EA5792 /* icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 23187CF7171FCE3200EA5792 /* icon_57.png */; };
 		C4A659057D224761A3D7F523 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66A13824400A40DE9F7AA39D /* libPods.a */; };
+		E325D39717201897006FB06B /* TAInvoiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E325D39617201897006FB06B /* TAInvoiceManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		23187CF7171FCE3200EA5792 /* icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_57.png; sourceTree = "<group>"; };
 		66A13824400A40DE9F7AA39D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F2D3AD365C642D1BC37777A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		E325D39517201897006FB06B /* TAInvoiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAInvoiceManager.h; sourceTree = "<group>"; };
+		E325D39617201897006FB06B /* TAInvoiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAInvoiceManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,8 @@
 				230BE0A6171EAAF300494A27 /* Supporting Files */,
 				23187CCB171EB41300EA5792 /* TAResultViewController.h */,
 				23187CCC171EB41300EA5792 /* TAResultViewController.m */,
+				E325D39517201897006FB06B /* TAInvoiceManager.h */,
+				E325D39617201897006FB06B /* TAInvoiceManager.m */,
 			);
 			path = TaxApp;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				230BE0B0171EAAF300494A27 /* TAAppDelegate.m in Sources */,
 				230BE0BF171EAAF300494A27 /* TAViewController.m in Sources */,
 				23187CCD171EB41300EA5792 /* TAResultViewController.m in Sources */,
+				E325D39717201897006FB06B /* TAInvoiceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +346,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TaxApp/TaxApp-Prefix.pch";
 				INFOPLIST_FILE = "TaxApp/TaxApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -352,6 +359,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TaxApp/TaxApp-Prefix.pch";
 				INFOPLIST_FILE = "TaxApp/TaxApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

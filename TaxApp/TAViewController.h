@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TAInvoiceManager.h"
 
-@interface TAViewController : UITableViewController
+@interface TAViewController : UITableViewController<UITextFieldDelegate>
 
 @end

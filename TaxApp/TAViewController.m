@@ -197,27 +197,35 @@ typedef enum{
     });
 }
 
-- (ReceiptInfoLocalVerificationResult)verifyInputInfoTextFields
+- (BOOL)verifyInputInfoTextFieldsWithComplete:(void(^)())success failure:(void(^)(NSError *error))failure
 {
-    if ([self.receiptSerialNumberTextField.text length] <= 0) {
-        return ReceiptInfoLocalVerificationResultSerialNumberEmpty;
-    }else if ([self.receiptSecondaryNumberTextField.text length] <= 0) {
-        return ReceiptInfoLocalVerificationResultSecondaryNumberEmpty;
-    }else if ([self.receiptPasswordTextField.text length] <= 0 && _needReceiptPassword) {
-        return ReceiptInfoLocalVerificationResultPasswordEmpty;
-    }else if ([self.taxPayerNumberTextField.text length] <= 0 && _needTaxPayerNumber) {
-        return ReceiptInfoLocalVerificationResultTaxplayerNumberEmpty;
-    }else if ([self.verificationCodeTextField.text length] <= 0){
-        return ReceiptInfoLocalVerificationResultVerificationCodeEmpty;
-    }else{
-        return ReceiptInfoLocalVerificationResultSuccess;
+    TAInvoiceType invoiceType = [[TAInvoiceManager sharedInstance] getInvoiceTypeWithInvoiceCode:self.receiptSerialNumberTextField.text];
+    
+    NSArray *allSubviews = [NSArray arrayWithObjects:self.receiptSerialNumberTextField,self.receiptSecondaryNumberTextField,self.taxPayerNumberTextField,self.receiptPasswordTextField,self.verificationCodeTextField,nil];
+    
+    for (UITextField *view in allSubviews)
+    {
+        UITextField *textField = (UITextField*)view;
+        NSString *invoiceInfoItemValue = textField.text;
+        TAInvoiceInfoItemType invoiceInfoItemType = [textField tag];
+        if (![[TAInvoiceManager sharedInstance] checkInvoiceInfoItemValidation:invoiceInfoItemType  value:invoiceInfoItemValue invoiceType:invoiceType
+                    failure:failure])
+        {
+                return NO;
+        }
     }
+    
+    return YES;
 }
 
 - (NSString *)urlStringForReceiptVerification
 {
     return [NSString stringWithFormat:VERIFICATION_URL_FORMAT, [self.verificationCodeTextField.text lowercaseString], self.receiptSerialNumberTextField.text, self.receiptSecondaryNumberTextField.text, @"", self.receiptPasswordTextField.text, @"", @"", !self.firstTimeVerifySwitch.on]; //!self.firstTimeVerifySwitch.on because server side bug, isFirst is used the wrong way
 }
+
+#define PASSWORD_SECTION 2
+#define TAXPAYER_SECTION 3
+#define VERIFICATION_SECTION 5
 
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -227,18 +235,45 @@ typedef enum{
     }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == TAInvoiceInfoItemInvoiceCode)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            NSRange range = NSMakeRange(PASSWORD_SECTION, 2);
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:range] withRowAnimation:UITableViewRowAnimationAutomatic];
+        });
+        return YES;
+    }
+    
+    return YES;
+}
+
 #pragma mark - UITableViewDelegate
-#define PASSWORD_SECTION 2
-#define TAXPAYER_SECTION 3
-#define VERIFICATION_SECTION 5
+
 
 // hide/show each section based on current receipt
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == PASSWORD_SECTION && !_needReceiptPassword) {
-        return 0.0f;
-    }else if (section == TAXPAYER_SECTION && !_needTaxPayerNumber){
-        return 0.0f;
+    
+    NSString *invoiceCode = self.receiptSerialNumberTextField.text;
+    TAInvoiceType invoiceType = TAInvoiceTypeUnknown;
+    
+    if (invoiceCode)
+        invoiceType = [[TAInvoiceManager sharedInstance] getInvoiceTypeWithInvoiceCode:invoiceCode];
+    
+    if (section == PASSWORD_SECTION) {
+        if (!invoiceCode || [invoiceCode isEqualToString:@""] ||
+           ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxPassword invoiceType:invoiceType])
+            return 0.0f;
+        else
+            return 1.0f;
+    }else if (section == TAXPAYER_SECTION){
+        if( !invoiceCode || [invoiceCode isEqualToString:@""] ||
+           ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxControlCode invoiceType:invoiceType])
+            return 0.0f;
+        else
+            return 1.0f;
     }else{
         return 1.0f;
     }
@@ -248,10 +283,22 @@ typedef enum{
 {
     NSString *headerTitle = [super tableView:tableView titleForHeaderInSection:section];
     
-    if (section == PASSWORD_SECTION && !_needReceiptPassword) {
-        return @"";
-    }else if (section == TAXPAYER_SECTION && !_needTaxPayerNumber){
-        return @"";
+    NSString *invoiceCode = self.receiptSerialNumberTextField.text;
+    TAInvoiceType invoiceType = TAInvoiceTypeUnknown;
+    
+    if (invoiceCode)
+        invoiceType = [[TAInvoiceManager sharedInstance] getInvoiceTypeWithInvoiceCode:invoiceCode];
+    
+    if (section == PASSWORD_SECTION) {
+        if (!invoiceCode || [invoiceCode isEqualToString:@""] ||
+            ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxPassword invoiceType:invoiceType])
+            return @"";
+        return headerTitle;
+    }else if (section == TAXPAYER_SECTION){
+        if (!invoiceCode || [invoiceCode isEqualToString:@""] ||
+            ![[TAInvoiceManager sharedInstance] isInvoiceInfoItemRequired:TAInvoiceInfoItemTaxControlCode invoiceType:invoiceType])
+            return @"";
+        return headerTitle;
     }else{
         return headerTitle;
     }
@@ -294,29 +341,13 @@ typedef enum{
 - (IBAction)showResultController:(id)sender {
     
     [self.view endEditing:YES];
-    ReceiptInfoLocalVerificationResult localVerificationResult = [self verifyInputInfoTextFields];
     
-    switch (localVerificationResult) {
-        case ReceiptInfoLocalVerificationResultSerialNumberEmpty:
-            [self showOverlayMessage:@"发票代码不能为空!" hideAfterDelay:1.0];
-            break;
-        case ReceiptInfoLocalVerificationResultSecondaryNumberEmpty:
-            [self showOverlayMessage:@"发票号码不能为空!" hideAfterDelay:1.0];
-            break;
-        case ReceiptInfoLocalVerificationResultPasswordEmpty:
-            [self showOverlayMessage:@"发票密码不能为空!" hideAfterDelay:1.0];
-            break;
-        case ReceiptInfoLocalVerificationResultTaxplayerNumberEmpty:
-            [self showOverlayMessage:@"纳税人税控号不能为空!" hideAfterDelay:1.0];
-            break;
-        case ReceiptInfoLocalVerificationResultVerificationCodeEmpty:
-            [self showOverlayMessage:@"验证码不能为空!" hideAfterDelay:1.0];
-            break;
-        case ReceiptInfoLocalVerificationResultSuccess:
-            [self sendForVerification];
-            
-        default:
-            break;
+    BOOL result = [self verifyInputInfoTextFieldsWithComplete:nil failure:^(NSError *error) {
+        [self showOverlayMessage:[error localizedDescription] hideAfterDelay:1.0];
+    }];
+    
+    if (result) {
+        [self sendForVerification];
     }
     
 }
