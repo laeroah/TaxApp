@@ -98,7 +98,7 @@ typedef enum{
     NSURL *url = [NSURL URLWithString:@"http://www.bjtax.gov.cn/ptfp/"];
     _httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     NSMutableURLRequest *request = [_httpClient requestWithMethod:@"GET" path:@"http://www.bjtax.gov.cn/ptfp/fpindex.jsp" parameters:nil];
-    [request setCachePolicy:NSURLCacheStorageNotAllowed];
+    //[request setCachePolicy:NSURLCacheStorageNotAllowed];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [_httpClient enqueueHTTPRequestOperation:operation];
 }
@@ -114,6 +114,14 @@ typedef enum{
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        
+//        if (!responseString)
+//        {
+//            NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+//        
+//            responseString = [[NSString alloc] initWithData:responseObject encoding:enc];
+//        }
+        
         NSLog(@"respond string: %@", responseString);
         if (responseString) {
             CXMLDocument *doc= [[CXMLDocument alloc] initWithXMLString:responseString options:0 error:nil];
