@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TAViewController : UIViewController
+@interface TAViewController : UITableViewController
 
 @end
