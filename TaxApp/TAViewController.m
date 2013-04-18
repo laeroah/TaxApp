@@ -114,22 +114,7 @@ typedef enum{
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        
-        if (!responseString)
-        {
-            NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-        
-            responseString = [[NSString alloc] initWithData:responseObject encoding:enc];
-            
-            [self hideAllOverlayMessage];
-            [self showOverlayMessage:@"请求失败!" hideAfterDelay:1.0];
-            
-            [self refreshCookie];
-            [self getVerifyCodeButtonImage];
-            
-            return;
-        }
-        
+       
         NSLog(@"respond string: %@", responseString);
         if (responseString) {
             CXMLDocument *doc= [[CXMLDocument alloc] initWithXMLString:responseString options:0 error:nil];
@@ -152,6 +137,7 @@ typedef enum{
             }
         }else{
             [self refreshCookie];
+            [self getVerifyCodeButtonImage];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hideAllOverlayMessage];
                 [self showOverlayMessage:@"请求失败!" hideAfterDelay:1.0];
