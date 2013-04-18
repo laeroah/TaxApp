@@ -138,6 +138,15 @@
     };
 }
 
+- (NSArray *)specialLastFiveArray
+{
+    return @[@"71011",@"71012",@"71013“,@”71061“,@”71062“,@”71063”,@“73051”,@“73052”,@“73053"];
+}
+
+- (NSArray*)oldLastFiveArray{
+    return @[@"75021",@"75011"];
+}
+
 -(TAInvoiceType)getInvoiceTypeWithInvoiceCode:(NSString*)invoiceCode
 {
     if (!invoiceCode)
@@ -162,6 +171,16 @@
         
         if (!typeNumber)
         {
+            if ([[self specialLastFiveArray] containsObject:lastFive])
+            {
+                return TAInvoiceTypeSpecial;
+            }
+            
+            if ([[self oldLastFiveArray] containsObject:lastFive])
+            {
+                return TAInvoiceTypeOld;
+            }
+            
             return TAInvoiceTypeUnknown;
         }
     }
@@ -395,10 +414,6 @@
 
 #pragma mark - Invoice Info Item Required
 
-- (NSArray *)specialLastFiveArray
-{
-    return @[@"71011",@"71012",@"71013“,@”71061“,@”71062“,@”71063”,@“73051”,@“73052”,@“73053"];
-}
 
 - (NSArray *)specialLastFiveToInfoItems
 {
@@ -406,9 +421,7 @@
     ];
 }
 
-- (NSArray*)checkOldLastFiveArray{
-    return @[@"75021",@"75011"];
-}
+
 
 - (NSArray *)checkOldLastFiveToInfoItems
 {
@@ -458,7 +471,26 @@
     NSArray *requiredItems = [[self invoiceTypeRequiredItems] objectForKey:@(invoiceType)];
     
     if (!requiredItems)
+    {
         return NO;
+    }
+    
+    if (invoiceType == TAInvoiceTypeSpecial)
+    {
+        if ([[self specialLastFiveToInfoItems] containsObject:@(invoiceInfoItemType)])
+        {
+            return YES;
+        }
+        return NO;
+    }
+    
+    if (invoiceType == TAInvoiceTypeOld) {
+        if ([[self oldLastFiveArray] containsObject:@(invoiceInfoItemType)])
+        {
+            return YES;
+        }
+        return NO;
+    }
     
     if ([requiredItems containsObject:@(invoiceInfoItemType)])
         return YES;

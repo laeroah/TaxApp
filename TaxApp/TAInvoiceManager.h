@@ -16,7 +16,9 @@ typedef enum {
     TAInvoiceTypeVatNormal = 1,
     TAInvoiceTypeVehicleSales = 2,
     TAInvoiceTypePedlarsMarket = 3 ,
-    TAInvoiceTypePrint = 4
+    TAInvoiceTypePrint = 4 ,
+    TAInvoiceTypeSpecial = 5 ,
+    TAInvoiceTypeOld = 6 ,
 } TAInvoiceType;
 
 typedef enum{
