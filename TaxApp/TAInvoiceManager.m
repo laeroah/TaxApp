@@ -181,7 +181,7 @@
                 return TAInvoiceTypeOld;
             }
             
-            return TAInvoiceTypeUnknown;
+            return TAInvoiceTypePrint;
         }
     }
     

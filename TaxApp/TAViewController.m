@@ -237,14 +237,14 @@ typedef enum{
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (textField.tag == TAInvoiceInfoItemInvoiceCode)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            NSRange range = NSMakeRange(PASSWORD_SECTION, 2);
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:range] withRowAnimation:UITableViewRowAnimationAutomatic];
-        });
-        return YES;
-    }
+//    if (textField.tag == TAInvoiceInfoItemInvoiceCode)
+//    {
+//        dispatch_async(dispatch_get_main_queue(), ^(void) {
+//            NSRange range = NSMakeRange(PASSWORD_SECTION, 2);
+//            [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:range] withRowAnimation:UITableViewRowAnimationAutomatic];
+//        });
+//        return YES;
+//    }
     
     return YES;
 }
