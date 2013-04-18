@@ -115,12 +115,20 @@ typedef enum{
         
         NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         
-//        if (!responseString)
-//        {
-//            NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-//        
-//            responseString = [[NSString alloc] initWithData:responseObject encoding:enc];
-//        }
+        if (!responseString)
+        {
+            NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+        
+            responseString = [[NSString alloc] initWithData:responseObject encoding:enc];
+            
+            [self hideAllOverlayMessage];
+            [self showOverlayMessage:@"请求失败!" hideAfterDelay:1.0];
+            
+            [self refreshCookie];
+            [self getVerifyCodeButtonImage];
+            
+            return;
+        }
         
         NSLog(@"respond string: %@", responseString);
         if (responseString) {
