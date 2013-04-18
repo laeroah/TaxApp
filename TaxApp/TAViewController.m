@@ -241,7 +241,7 @@ typedef enum{
     
     switch (localVerificationResult) {
         case ReceiptInfoLocalVerificationResultSerialNumberEmpty:
-            [self showOverlayMessage:@"发票代号不能为空!" hideAfterDelay:1.0];
+            [self showOverlayMessage:@"发票代码不能为空!" hideAfterDelay:1.0];
             break;
         case ReceiptInfoLocalVerificationResultSecondaryNumberEmpty:
             [self showOverlayMessage:@"发票号码不能为空!" hideAfterDelay:1.0];
