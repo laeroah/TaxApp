@@ -92,6 +92,7 @@ typedef enum{
     NSURL *url = [NSURL URLWithString:@"http://www.bjtax.gov.cn/ptfp/"];
     _httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     NSMutableURLRequest *request = [_httpClient requestWithMethod:@"GET" path:@"http://www.bjtax.gov.cn/ptfp/fpindex.jsp" parameters:nil];
+    [request setCachePolicy:NSURLCacheStorageNotAllowed];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [_httpClient enqueueHTTPRequestOperation:operation];
 }
