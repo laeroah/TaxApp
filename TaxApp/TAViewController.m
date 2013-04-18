@@ -58,6 +58,12 @@ typedef enum{
     [self getVerifyCodeButtonImage];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.view endEditing:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
