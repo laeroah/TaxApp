@@ -318,7 +318,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="第一次验证次发票" id="o3s-W4-S4S">
+                            <tableViewSection headerTitle="第一次验证此发票" id="o3s-W4-S4S">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="wYl-ZF-z5O">
                                         <rect key="frame" x="0.0" y="414" width="320" height="46"/>
