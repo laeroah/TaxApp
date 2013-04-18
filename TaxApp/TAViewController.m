@@ -61,7 +61,6 @@ typedef enum{
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -206,6 +205,8 @@ typedef enum{
 
 #pragma mark - actions
 - (IBAction)showResultController:(id)sender {
+    
+    [self.view endEditing:YES];
     
     ReceiptInfoLocalVerificationResult localVerificationResult = [self verifyInputInfoTextFields];
     

@@ -20,6 +20,8 @@
 		230BE0BC171EAAF300494A27 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 230BE0BA171EAAF300494A27 /* MainStoryboard_iPad.storyboard */; };
 		230BE0BF171EAAF300494A27 /* TAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 230BE0BE171EAAF300494A27 /* TAViewController.m */; };
 		23187CCD171EB41300EA5792 /* TAResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23187CCC171EB41300EA5792 /* TAResultViewController.m */; };
+		23187CF6171FCDC100EA5792 /* icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 23187CF5171FCDC100EA5792 /* icon_114.png */; };
+		23187CF8171FCE3200EA5792 /* icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 23187CF7171FCE3200EA5792 /* icon_57.png */; };
 		C4A659057D224761A3D7F523 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66A13824400A40DE9F7AA39D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		230BE0BE171EAAF300494A27 /* TAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TAViewController.m; sourceTree = "<group>"; };
 		23187CCB171EB41300EA5792 /* TAResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAResultViewController.h; sourceTree = "<group>"; };
 		23187CCC171EB41300EA5792 /* TAResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAResultViewController.m; sourceTree = "<group>"; };
+		23187CF5171FCDC100EA5792 /* icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_114.png; sourceTree = "<group>"; };
+		23187CF7171FCE3200EA5792 /* icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_57.png; sourceTree = "<group>"; };
 		66A13824400A40DE9F7AA39D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F2D3AD365C642D1BC37777A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -65,6 +69,7 @@
 		230BE093171EAAF300494A27 = {
 			isa = PBXGroup;
 			children = (
+				23187CF9171FCE3800EA5792 /* Application Icons */,
 				230BE0A5171EAAF300494A27 /* TaxApp */,
 				230BE09E171EAAF300494A27 /* Frameworks */,
 				230BE09D171EAAF300494A27 /* Products */,
@@ -119,6 +124,15 @@
 				230BE0B5171EAAF300494A27 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		23187CF9171FCE3800EA5792 /* Application Icons */ = {
+			isa = PBXGroup;
+			children = (
+				23187CF7171FCE3200EA5792 /* icon_57.png */,
+				23187CF5171FCDC100EA5792 /* icon_114.png */,
+			);
+			name = "Application Icons";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +195,8 @@
 				230BE0B6171EAAF300494A27 /* Default-568h@2x.png in Resources */,
 				230BE0B9171EAAF300494A27 /* MainStoryboard_iPhone.storyboard in Resources */,
 				230BE0BC171EAAF300494A27 /* MainStoryboard_iPad.storyboard in Resources */,
+				23187CF6171FCDC100EA5792 /* icon_114.png in Resources */,
+				23187CF8171FCE3200EA5792 /* icon_57.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
