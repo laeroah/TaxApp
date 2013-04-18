@@ -222,9 +222,8 @@ typedef enum{
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    // do dynamic checks here as each textfield loses focus
     if (textField == self.receiptSerialNumberTextField) {
-        _needReceiptPassword = !_needReceiptPassword;
-        [self showPasswordRow:_needReceiptPassword];
     }
 }
 
