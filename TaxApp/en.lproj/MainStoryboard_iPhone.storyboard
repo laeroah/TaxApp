@@ -221,18 +221,21 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IhL-2o-Lbl">
                                                     <constraints>
+                                                        <constraint firstAttribute="width" constant="210" id="3wm-3c-ytJ"/>
                                                         <constraint firstAttribute="height" constant="30" id="GM5-YP-EOo"/>
-                                                        <constraint firstAttribute="width" constant="260" id="a8h-rr-8fO"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="go"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="lad-ec-dfP" id="f5w-iV-hO8"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="IhL-2o-Lbl" firstAttribute="centerY" secondItem="j5F-Gl-Zv0" secondAttribute="centerY" type="default" id="KWd-Zg-ND0"/>
-                                            <constraint firstItem="IhL-2o-Lbl" firstAttribute="centerX" secondItem="j5F-Gl-Zv0" secondAttribute="centerX" type="default" id="XIV-ct-dr0"/>
+                                            <constraint firstItem="IhL-2o-Lbl" firstAttribute="leading" secondItem="j5F-Gl-Zv0" secondAttribute="leading" constant="30" id="TLn-pB-Afc"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -248,7 +251,7 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d78-o2-Gxo">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="260" id="0IX-Yu-f4x"/>
+                                                        <constraint firstAttribute="width" constant="210" id="E7J-Yr-yNS"/>
                                                         <constraint firstAttribute="height" constant="30" id="UI2-qD-INb"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -258,8 +261,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="d78-o2-Gxo" firstAttribute="centerX" secondItem="Bjj-VI-OHs" secondAttribute="centerX" type="default" id="5nP-jw-ciO"/>
-                                            <constraint firstItem="d78-o2-Gxo" firstAttribute="top" secondItem="Bjj-VI-OHs" secondAttribute="top" constant="8" id="HW4-gj-ct7"/>
+                                            <constraint firstItem="d78-o2-Gxo" firstAttribute="leading" secondItem="Bjj-VI-OHs" secondAttribute="leading" constant="30" id="Ih6-aR-AZb"/>
+                                            <constraint firstItem="d78-o2-Gxo" firstAttribute="centerY" secondItem="Bjj-VI-OHs" secondAttribute="centerY" type="default" id="mqP-4c-YPW"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -275,7 +278,7 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Mf-U3-ZuE">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="260" id="2am-kV-hIZ"/>
+                                                        <constraint firstAttribute="width" constant="210" id="64i-XY-ZTE"/>
                                                         <constraint firstAttribute="height" constant="30" id="Wuu-aA-chy"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -286,7 +289,7 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="1Mf-U3-ZuE" firstAttribute="centerY" secondItem="EgK-tp-rKd" secondAttribute="centerY" type="default" id="EQj-2K-IjH"/>
-                                            <constraint firstItem="1Mf-U3-ZuE" firstAttribute="centerX" secondItem="EgK-tp-rKd" secondAttribute="centerX" type="default" id="cp1-PM-O1H"/>
+                                            <constraint firstItem="1Mf-U3-ZuE" firstAttribute="leading" secondItem="EgK-tp-rKd" secondAttribute="leading" constant="30" id="Rnu-RN-kfE"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -302,7 +305,7 @@
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vW8-1J-kY3">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="260" id="VC0-Cw-rvC"/>
+                                                        <constraint firstAttribute="width" constant="210" id="GJ6-xr-Q1x"/>
                                                         <constraint firstAttribute="height" constant="30" id="pFH-vh-hyI"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -312,8 +315,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="vW8-1J-kY3" firstAttribute="leading" secondItem="cui-jb-zca" secondAttribute="leading" constant="30" id="Oo9-bI-HER"/>
                                             <constraint firstItem="vW8-1J-kY3" firstAttribute="centerY" secondItem="cui-jb-zca" secondAttribute="centerY" type="default" id="mxk-Ig-47X"/>
-                                            <constraint firstItem="vW8-1J-kY3" firstAttribute="centerX" secondItem="cui-jb-zca" secondAttribute="centerX" type="default" id="o5N-ap-7PJ"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>
@@ -436,6 +439,7 @@
         <class className="TAResultViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TAResultViewController.h"/>
             <relationships>
+                <relationship kind="action" name="confirmButtonDidPress:"/>
                 <relationship kind="outlet" name="ownerLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="receiptSecondaryNumberLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="receiptSerialNumberLabel" candidateClass="UILabel"/>
@@ -446,6 +450,8 @@
         <class className="TAViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TAViewController.h"/>
             <relationships>
+                <relationship kind="action" name="requestForNewVerificationCode:"/>
+                <relationship kind="action" name="showResultController:"/>
                 <relationship kind="outlet" name="firstTimeVerifySwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="receiptPasswordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="receiptSecondaryNumberTextField" candidateClass="UITextField"/>

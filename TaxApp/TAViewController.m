@@ -51,8 +51,8 @@ typedef enum{
 {
     [super viewDidLoad];
     
-    _needReceiptPassword = YES;
-    _needTaxPayerNumber = NO;
+    [self showPasswordRow:YES];
+    [self showTaxPayerRow:YES];
     
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     [self refreshCookie];
@@ -169,6 +169,7 @@ typedef enum{
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
+
 #define MESSAGE_Y_OFFSET -50.0f
 - (void)showOverlayMessage:(NSString *)msg hideAfterDelay:(NSTimeInterval)seconds
 {
@@ -216,6 +217,63 @@ typedef enum{
 - (NSString *)urlStringForReceiptVerification
 {
     return [NSString stringWithFormat:VERIFICATION_URL_FORMAT, [self.verificationCodeTextField.text lowercaseString], self.receiptSerialNumberTextField.text, self.receiptSecondaryNumberTextField.text, @"", self.receiptPasswordTextField.text, @"", @"", !self.firstTimeVerifySwitch.on]; //!self.firstTimeVerifySwitch.on because server side bug, isFirst is used the wrong way
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == self.receiptSerialNumberTextField) {
+        _needReceiptPassword = !_needReceiptPassword;
+        [self showPasswordRow:_needReceiptPassword];
+    }
+}
+
+#pragma mark - UITableViewDelegate
+#define PASSWORD_SECTION 2
+#define TAXPAYER_SECTION 3
+#define VERIFICATION_SECTION 5
+
+// hide/show each section based on current receipt
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == PASSWORD_SECTION && !_needReceiptPassword) {
+        return 0.0f;
+    }else if (section == TAXPAYER_SECTION && !_needTaxPayerNumber){
+        return 0.0f;
+    }else{
+        return 1.0f;
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *headerTitle = [super tableView:tableView titleForHeaderInSection:section];
+    
+    if (section == PASSWORD_SECTION && !_needReceiptPassword) {
+        return @"";
+    }else if (section == TAXPAYER_SECTION && !_needTaxPayerNumber){
+        return @"";
+    }else{
+        return headerTitle;
+    }
+}
+
+#pragma mark - adjust tableview
+- (void)showPasswordRow:(BOOL)show
+{
+    _needReceiptPassword = show;
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:PASSWORD_SECTION] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)showTaxPayerRow:(BOOL)show
+{
+    _needTaxPayerNumber = show;
+    if (!_needTaxPayerNumber) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:TAXPAYER_SECTION] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else{
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - UIScrollViewDelegate
