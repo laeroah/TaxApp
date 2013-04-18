@@ -28,6 +28,7 @@ typedef enum{
     BOOL _needTaxPayerNumber;
     BOOL _needReceiptPassword;
     AFHTTPClient *_httpClient;
+    CGFloat _overlayMessageYOffset;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *verifyCodeButton;
@@ -61,6 +62,11 @@ typedef enum{
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -119,7 +125,7 @@ typedef enum{
                 NSString *verificationCodeNodeValue = [verificationCodeNode stringValue];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    [self hideAllOverlayMessage];
                     
                     if ([verificationCodeNodeValue isEqualToString:@"1"]) {
                         [self performSegueWithIdentifier:@"showResultSegue" sender:responseString];
@@ -131,14 +137,14 @@ typedef enum{
         }else{
             [self refreshCookie];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [self hideAllOverlayMessage];
                 [self showOverlayMessage:@"请求失败!" hideAfterDelay:1.0];
             });
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self hideAllOverlayMessage];
             [self showOverlayMessage:@"请求失败!" hideAfterDelay:1.0];
         });
     }];
@@ -158,11 +164,19 @@ typedef enum{
     }
 }
 
+- (void)hideAllOverlayMessage
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
+
+#define MESSAGE_Y_OFFSET -50.0f
 - (void)showOverlayMessage:(NSString *)msg hideAfterDelay:(NSTimeInterval)seconds
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         MBProgressHUD *overlayMessageView = [[MBProgressHUD alloc] initWithView:self.view];
         overlayMessageView.removeFromSuperViewOnHide = YES;
+        overlayMessageView.userInteractionEnabled = YES;
+        overlayMessageView.yOffset = MESSAGE_Y_OFFSET;
         
         [self.view addSubview:overlayMessageView];
         [self.view bringSubviewToFront:overlayMessageView];
@@ -204,11 +218,25 @@ typedef enum{
     return [NSString stringWithFormat:VERIFICATION_URL_FORMAT, [self.verificationCodeTextField.text lowercaseString], self.receiptSerialNumberTextField.text, self.receiptSecondaryNumberTextField.text, @"", self.receiptPasswordTextField.text, @"", @"", !self.firstTimeVerifySwitch.on]; //!self.firstTimeVerifySwitch.on because server side bug, isFirst is used the wrong way
 }
 
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSArray *huds = [MBProgressHUD allHUDsForView:self.view];
+    
+    CGFloat yOffset = scrollView.contentOffset.y;
+    
+    for (MBProgressHUD *hud in huds) {
+        CGRect currentFrame = hud.frame;
+        hud.frame = CGRectMake(currentFrame.origin.x, MESSAGE_Y_OFFSET + 50 + yOffset, currentFrame.size.width, currentFrame.size.height);
+    }
+    
+}
+
+
 #pragma mark - actions
 - (IBAction)showResultController:(id)sender {
     
     [self.view endEditing:YES];
-    
     ReceiptInfoLocalVerificationResult localVerificationResult = [self verifyInputInfoTextFields];
     
     switch (localVerificationResult) {
