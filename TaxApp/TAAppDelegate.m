@@ -7,12 +7,18 @@
 //
 
 #import "TAAppDelegate.h"
+#import <HockeySDK/HockeySDK.h>
+
 
 @implementation TAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"e88813ebce9528fdd8751bcb42c12dcd"
+                                                           delegate:self];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    
     return YES;
 }
 							

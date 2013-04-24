@@ -22,6 +22,11 @@
 		23187CCD171EB41300EA5792 /* TAResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23187CCC171EB41300EA5792 /* TAResultViewController.m */; };
 		23187CF6171FCDC100EA5792 /* icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 23187CF5171FCDC100EA5792 /* icon_114.png */; };
 		23187CF8171FCE3200EA5792 /* icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 23187CF7171FCE3200EA5792 /* icon_57.png */; };
+		23CC46FC17250B010018E0FD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23CC46FB17250B010018E0FD /* QuartzCore.framework */; };
+		23CC46FE17250B230018E0FD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23CC46FD17250B230018E0FD /* CoreText.framework */; };
+		23CC470917250BE20018E0FD /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23CC470517250BE20018E0FD /* HockeySDK.framework */; };
+		23CC470A17250BE30018E0FD /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 23CC470717250BE20018E0FD /* HockeySDK.xcconfig */; };
+		23CC470B17250BE30018E0FD /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 23CC470817250BE20018E0FD /* HockeySDKResources.bundle */; };
 		C4A659057D224761A3D7F523 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66A13824400A40DE9F7AA39D /* libPods.a */; };
 		E325D39717201897006FB06B /* TAInvoiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E325D39617201897006FB06B /* TAInvoiceManager.m */; };
 /* End PBXBuildFile section */
@@ -48,6 +53,11 @@
 		23187CCC171EB41300EA5792 /* TAResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAResultViewController.m; sourceTree = "<group>"; };
 		23187CF5171FCDC100EA5792 /* icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_114.png; sourceTree = "<group>"; };
 		23187CF7171FCE3200EA5792 /* icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_57.png; sourceTree = "<group>"; };
+		23CC46FB17250B010018E0FD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		23CC46FD17250B230018E0FD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		23CC470517250BE20018E0FD /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		23CC470717250BE20018E0FD /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
+		23CC470817250BE20018E0FD /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		66A13824400A40DE9F7AA39D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F2D3AD365C642D1BC37777A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E325D39517201897006FB06B /* TAInvoiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAInvoiceManager.h; sourceTree = "<group>"; };
@@ -59,10 +69,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23CC46FE17250B230018E0FD /* CoreText.framework in Frameworks */,
+				23CC46FC17250B010018E0FD /* QuartzCore.framework in Frameworks */,
 				230BE0A0171EAAF300494A27 /* UIKit.framework in Frameworks */,
 				230BE0A2171EAAF300494A27 /* Foundation.framework in Frameworks */,
 				230BE0A4171EAAF300494A27 /* CoreGraphics.framework in Frameworks */,
 				C4A659057D224761A3D7F523 /* libPods.a in Frameworks */,
+				23CC470917250BE20018E0FD /* HockeySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +104,9 @@
 		230BE09E171EAAF300494A27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				23CC470417250BE20018E0FD /* HockeySDK.embeddedframework */,
+				23CC46FD17250B230018E0FD /* CoreText.framework */,
+				23CC46FB17250B010018E0FD /* QuartzCore.framework */,
 				230BE09F171EAAF300494A27 /* UIKit.framework */,
 				230BE0A1171EAAF300494A27 /* Foundation.framework */,
 				230BE0A3171EAAF300494A27 /* CoreGraphics.framework */,
@@ -138,6 +154,24 @@
 				23187CF5171FCDC100EA5792 /* icon_114.png */,
 			);
 			name = "Application Icons";
+			sourceTree = "<group>";
+		};
+		23CC470417250BE20018E0FD /* HockeySDK.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				23CC470517250BE20018E0FD /* HockeySDK.framework */,
+				23CC470617250BE20018E0FD /* Resources */,
+			);
+			path = HockeySDK.embeddedframework;
+			sourceTree = "<group>";
+		};
+		23CC470617250BE20018E0FD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				23CC470717250BE20018E0FD /* HockeySDK.xcconfig */,
+				23CC470817250BE20018E0FD /* HockeySDKResources.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +236,8 @@
 				230BE0BC171EAAF300494A27 /* MainStoryboard_iPad.storyboard in Resources */,
 				23187CF6171FCDC100EA5792 /* icon_114.png in Resources */,
 				23187CF8171FCE3200EA5792 /* icon_57.png in Resources */,
+				23CC470A17250BE30018E0FD /* HockeySDK.xcconfig in Resources */,
+				23CC470B17250BE30018E0FD /* HockeySDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +379,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7F2D3AD365C642D1BC37777A /* Pods.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/HockeySDK.embeddedframework\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TaxApp/TaxApp-Prefix.pch";
 				INFOPLIST_FILE = "TaxApp/TaxApp-Info.plist";
@@ -356,11 +396,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7F2D3AD365C642D1BC37777A /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Omnigon Communications LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Omnigon Communications LLC";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/HockeySDK.embeddedframework\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TaxApp/TaxApp-Prefix.pch";
 				INFOPLIST_FILE = "TaxApp/TaxApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "A6484527-9224-4686-A491-47C446714491";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A6484527-9224-4686-A491-47C446714491";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

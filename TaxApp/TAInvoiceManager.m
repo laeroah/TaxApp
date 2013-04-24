@@ -337,18 +337,18 @@
         return NO;
     }
     
-    if (minLength && [minLength intValue] > [invoiceInfoItemValue length])
-    {
-        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-        [userInfo setValue:[ NSString stringWithFormat:@"%@的长度小于%@" ,
-                            itemDefine[@"Name"] , minLength ] forKey:NSLocalizedDescriptionKey];
-        NSError *error = [[NSError alloc] initWithDomain:TAInvoiceErrorDomain code:TAInvoiceInfoItemBadFormat userInfo:userInfo];
-        if (failure) {
-            failure( error );
-        }
-
-        return NO;
-    }
+//    if (minLength && [minLength intValue] > [invoiceInfoItemValue length])
+//    {
+//        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+//        [userInfo setValue:[ NSString stringWithFormat:@"%@的长度小于%@" ,
+//                            itemDefine[@"Name"] , minLength ] forKey:NSLocalizedDescriptionKey];
+//        NSError *error = [[NSError alloc] initWithDomain:TAInvoiceErrorDomain code:TAInvoiceInfoItemBadFormat userInfo:userInfo];
+//        if (failure) {
+//            failure( error );
+//        }
+//
+//        return NO;
+//    }
     
     if ([itemDefine[@"Type"] isEqualToString:@"Number"])
     {
